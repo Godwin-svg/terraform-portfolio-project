@@ -9,10 +9,10 @@ I deployed a responsive, single-page Next.js portfolio website on AWS using Infr
 ## Requirements
 The website must be:
 
-- **Highly Available**: Accessible worldwide with minimal downtime  
-- **Scalable**: Handle increasing traffic without performance issues  
-- **Cost-Effective**: Optimized hosting costs  
-- **Fast Loading**: Quick load times for global visitors  
+- Highly Available: Accessible worldwide with minimal downtime  
+- Scalable: Handle increasing traffic without performance issues  
+- Cost-Effective: Optimized hosting costs  
+- Fast Loading: Quick load times for global visitors  
 
 ## Project Setup
 
