@@ -32,9 +32,9 @@ npm run dev
 3 Access the app at http://localhost:3000
 
 ### 1.3 Configure Next.js for Static Export
-1 In the project root, create next.config.js:
-/**
- * @type {import('next').NextConfig}
+1 In the project root, create next.config.js: /
+/**/
+ * @type {import('next').NextConfig} /
  */
 const nextConfig = {
   output: 'export',
