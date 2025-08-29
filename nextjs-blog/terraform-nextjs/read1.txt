@@ -1,0 +1,258 @@
+Scenario
+A client developed a modern, responsive single-page portfolio website using Next.js. 
+They required hosting on a reliable, scalable, and cost-effective platform with 
+global availability and fast loading speeds
+
+MY Role:
+As a Cloud Engineer, I successfully deployed the client’s Next.js portfolio 
+website on AWS using Infrastructure as Code (IaC) with Terraform, 
+ensuring automation, scalability, and high performance.
+
+Requirements
+The website must be:
+Highly Available: Accessible worldwide with minimal downtime
+Scalable: Able to handle increasing traffic without performance degradation
+Cost-Effective: Optimized hosting costs without unnecessary expenses
+Fast Loading: Quick loading times for all visitors globally
+
+1.1 Create a GitHub Repository
+Go to GitHub and create a new repository named terraform-portfolio-project
+Initialize the repository with a README file
+Clone the repository to your local machine:  
+git clone git@github.com:Godwin-svg/terraform-portfolio-project.git
+
+1.2 Clone the Next.js Portfolio Starter Kit
+1.Clone the Portfolio Starter Kit:
+
+npx create-next-app@latest nextjs-blog --use-npm --example "https://github.com/vercel/
+next-learn/tree/main/basics/learn-starter"
+
+2. Navigate to the project directory and start the development server:
+cd nextjs-blog
+npm run dev
+
+3. Access your Next.js application at http://localhost:3000/
+
+Create Configuration File
+
+In the root of your project folder, create a new file called next.config.js
+Paste the following code into the file:
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  output: 'export',
+}
+
+module.exports = nextConfig
+
+
+Build Your Project
+After setting up the configuration, run the build command
+npm run build
+This will create a static version of your Next.js app in the out folder, which you can upload to any static website hosting service.
+
+Push to GitHub
+git add .
+git commit -m "nextjs file created"
+git push
+
+
+Step 3: Set Up Terraform Configuration
+Setting Up the Project Directory
+Create Project Directory
+mkdir terraform-nextjs
+cd terraform-nextjs 
+touch  provider.tf state.tf
+-povider.tf : contains provider configuration for Terraform project.
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
+
+# Configure AWS Provider
+provider "aws" {
+  region  = "us-east-1"
+  profile = "dev"
+
+}
+
+- state.t 
+state.tf → Configures remote backend for storing Terraform state securely.
+terraform {
+  backend "s3" {
+    bucket         = "inno-terraform-remote-state"
+    key            = "s3/terraform.tfstate"
+    region         = "us-east-1"
+    profile        = "dev"
+    dynamodb_table = "terraform-state-lock"
+
+  }
+}
+
+Initialize and Apply Terraform
+terraform fmt
+terraform init
+
+- touch main.tf
+
+- main.tf
+Holds main infrastructure resources Terraform will create
+# create s3 bucket
+resource "aws_s3_bucket" "website" {
+  bucket = "inno-123-nextjs-website-bucket"
+
+  tags = {
+    Name = "inno-123-nextjs-website-bucket"
+  }
+
+}
+
+# s3 bucket website configuration
+resource "aws_s3_bucket_website_configuration" "website-config" {
+  bucket = aws_s3_bucket.website.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+
+
+}
+
+# bucket ownership control
+resource "aws_s3_bucket_ownership_controls" "bucket-ownership-controls" {
+  bucket = aws_s3_bucket.website.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+
+}
+
+# allow bucket public access 
+resource "aws_s3_bucket_public_access_block" "allow-public-access" {
+  bucket = aws_s3_bucket.website.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+
+}
+
+
+# bucket acl
+resource "aws_s3_bucket_acl" "bucket-acl" {
+  bucket = aws_s3_bucket.website.id
+
+  depends_on = [aws_s3_bucket_ownership_controls.bucket-ownership-controls, aws_s3_bucket_public_access_block.allow-public-access]
+
+  acl = "public-read"
+
+}
+
+# s3 policy
+resource "aws_s3_bucket_policy" "website_policy" {
+  bucket = aws_s3_bucket.website.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.website.arn}/*"
+      }
+    ]
+  })
+
+}
+
+# Origin Access Identity
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+    comment = "OIA for Next.js portfolio site"
+  
+}
+
+# cloudfront distribution
+# CloudFront distribution
+resource "aws_cloudfront_distribution" "nextjs_distribution" {
+  origin {
+    domain_name = aws_s3_bucket.website.bucket_regional_domain_name
+    origin_id   = "inno-s3-nextjs-portfolio-bucket"
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+    }
+  }
+
+  enabled             = true
+  is_ipv6_enabled     = true
+  comment             = "Next.js portfolio site"
+  default_root_object = "index.html"
+
+  default_cache_behavior {
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "inno-s3-nextjs-portfolio-bucket"
+
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0
+    default_ttl            = 3600
+    max_ttl                = 86400
+    compress               = true
+  }
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+      
+    }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+}
+
+
+Deploying the Infrastuture to AWS: 
+- terraform fmt
+- terraform plan
+- terraform apply
+
+Step 4:
+aws s3 sync ./out s3://inno-123-nextjs-website-bucket --profile dev
+
+Step 5: Upload the Next.js Static Site to S3
+aws s3 sync ./out s3://inno-123-nextjs-website-bucket --profile dev 
+
+Step5: Configured Route 53 Subdomain for CloudFront Distribution
+I created a Route 53 subdomain and routed CloudFront distribution domain to nextjs.godwintechservices.com
+
+Step 5: Access the Deployed Website
+- The website was accessible at https://nextjs.godwintechservices.com/
+, but it is no longer available since I have destroyed the infrastructure.
+
+Step 6: Destroy the resources
+terraform destroy
+
+Reference :
+AWS Terraform Provider doc : https://registry.terraform.io/providers/hashicorp/aws/latest/docs 
+My GitHub repository : https://github.com/Godwin-svg/terraform-portfolio-project
