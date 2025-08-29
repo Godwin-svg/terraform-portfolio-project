@@ -43,7 +43,7 @@ const nextConfig = {
   output: 'export',
 }
 module.exports = nextConfig
-```
+
 2 Build the project:
 npm run build
 This generates a static version of the app in the out folder.
