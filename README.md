@@ -31,16 +31,17 @@ cd nextjs-blog
 npm run dev
 3 Access the app at http://localhost:3000
 
+```
 ### 1.3 Configure Next.js for Static Export
-1 In the project root, create next.config.js: /
-/**/
- * @type {import('next').NextConfig} /
+1 In the project root, create next.config.js: 
+/**
+ * @type {import('next').NextConfig} 
  */
 const nextConfig = {
   output: 'export',
 }
 module.exports = nextConfig
-
+```
 2 Build the project:
 npm run build
 This generates a static version of the app in the out folder.
