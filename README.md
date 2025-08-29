@@ -241,7 +241,7 @@ terraform destroy
 
 ```
 
-![Reference-Architecture](nextjs-blog/public/Reference-Architecture.png)
+![website](nextjs-blog/public/nexjs_website.PNG)
 
 
 
