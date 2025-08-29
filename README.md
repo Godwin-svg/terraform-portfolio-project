@@ -1,4 +1,4 @@
-![Reference-Architecture](nextjs-blog/public/Reference-Architecture.png)
+
 
 ```
 # Terraform Next.js Portfolio Project
