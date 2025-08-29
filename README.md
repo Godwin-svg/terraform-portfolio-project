@@ -1,15 +1,19 @@
+![Reference-Architecture](nextjs-blog/public/Reference-Architecture.png)
+```
+
 # Terraform Next.js Portfolio Project
 
 ## Project Overview
-I deployed a responsive, single-page Next.js portfolio website on AWS using Infrastructure as Code (IaC) with Terraform, ensuring scalability, reliability, and high performance.
+I deployed a responsive, single-page Next.js portfolio website on AWS using Infrastructure as 
+Code (IaC) with Terraform, ensuring scalability, reliability, and high performance.
 
 ## Requirements
 The website must be:
-```
-- **Highly Available**: Accessible worldwide with minimal downtime  
-- **Scalable**: Handle increasing traffic without performance issues  
-- **Cost-Effective**: Optimized hosting costs  
-- **Fast Loading**: Quick load times for global visitors  
+
+- Highly Available: Accessible worldwide with minimal downtime  
+- Scalable: Handle increasing traffic without performance issues  
+- Cost-Effective: Optimized hosting costs  
+- Fast Loading: Quick load times for global visitors  
 
 ## Project Setup
 
