@@ -20,8 +20,10 @@ The website must be:
 ## Project Setup
 
 ### 1. Create GitHub Repository
-1. Create a new repository named `terraform-portfolio-project`  
-2. Initialize with a README file  
-3. Clone the repository:
+1.1 Create a new repository named `terraform-portfolio-project`  
+1.2 Initialize with a README file  
+1.3 Clone the repository:
 ```bash
 git clone git@github.com:Godwin-svg/terraform-portfolio-project.git
+
+### 2. Clone Next.js Portfolio Starter Kit
