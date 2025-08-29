@@ -51,7 +51,7 @@ This generates a static version of the app in the out folder.
 git add .
 git commit -m "Next.js project created"
 git push
-```
+
 ## Terraform Configuration
 ### 1.4 Set Up Project Directory
 1 mkdir terraform-nextjs
