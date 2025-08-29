@@ -236,12 +236,11 @@ aws s3 sync ./out s3://inno-123-nextjs-website-bucket --profile dev
 The website was accessible at https://nextjs.godwintechservices.com
 It is no longer available as the infrastructure has been destroyed
 
-![Reference-Architecture](nextjs-blog/public/Reference-Architecture.png)
-
 ### 6 Destroy Resources
 terraform destroy
 
 ```
+![Reference-Architecture](nextjs-blog/public/Reference-Architecture.png)
 
 
 
