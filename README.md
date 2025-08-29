@@ -1,7 +1,7 @@
 ![Reference-Architecture](nextjs-blog/public/Reference-Architecture.png)
 ```
 
-# Terraform Next.js Portfolio Project
+# Next.js Portfolio Project
 
 ## Project Overview
 I deployed a responsive, single-page Next.js portfolio website on AWS using Infrastructure as 
@@ -43,7 +43,7 @@ const nextConfig = {
   output: 'export',
 }
 module.exports = nextConfig
-```
+
 2 Build the project:
 npm run build
 This generates a static version of the app in the out folder.
@@ -51,7 +51,7 @@ This generates a static version of the app in the out folder.
 git add .
 git commit -m "Next.js project created"
 git push
-```
+
 ## Terraform Configuration
 ### 1.4 Set Up Project Directory
 1 mkdir terraform-nextjs
@@ -240,6 +240,8 @@ It is no longer available as the infrastructure has been destroyed
 terraform destroy
 
 ```
+
+![website](nextjs-blog/public/nexjs_website.PNG)
 
 
 
