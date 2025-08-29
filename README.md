@@ -31,7 +31,7 @@ cd nextjs-blog
 npm run dev
 3 Access the app at http://localhost:3000
 
-```
+
  1.3 Configure Next.js for Static Export
 1 In the project root, create next.config.js: 
 /**
@@ -237,7 +237,7 @@ It is no longer available as the infrastructure has been destroyed
 ### 6 Destroy Resources
 terraform destroy
 
-
+```
 
 
 
