@@ -4,7 +4,8 @@
 # Terraform Next.js Portfolio Project
 
 ## Project Overview
-I deployed a responsive, single-page Next.js portfolio website on AWS using Infrastructure as Code (IaC) with Terraform, ensuring scalability, reliability, and high performance.
+I deployed a responsive, single-page Next.js portfolio website on AWS using Infrastructure as 
+Code (IaC) with Terraform, ensuring scalability, reliability, and high performance.
 
 ## Requirements
 The website must be:
