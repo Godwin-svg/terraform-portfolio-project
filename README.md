@@ -1,7 +1,7 @@
 ![Reference-Architecture](nextjs-blog/public/Reference-Architecture.png)
 ```
 
-# Terraform Next.js Portfolio Project
+# Next.js Portfolio Project
 
 ## Project Overview
 I deployed a responsive, single-page Next.js portfolio website on AWS using Infrastructure as 
