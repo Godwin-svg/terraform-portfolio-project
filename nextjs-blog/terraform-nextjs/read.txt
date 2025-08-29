@@ -13,5 +13,11 @@ resource "aws_s3_bucket_acl" "example" {
   acl    = "private"
 }
 
+#############################################
+Note Error & Correction
+############################################
+- When uploading file to the S3
+- aws s3 sync ./out s3://inno-123-nextjs-website-bucket (error, unkwn user ID)
+- aws s3 sync ./out s3://inno-123-nextjs-website-bucket --profile dev (corrected, added user profile)
 
 
