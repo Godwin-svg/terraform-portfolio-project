@@ -240,6 +240,7 @@ It is no longer available as the infrastructure has been destroyed
 terraform destroy
 
 ```
+
 ![Reference-Architecture](nextjs-blog/public/Reference-Architecture.png)
 
 
