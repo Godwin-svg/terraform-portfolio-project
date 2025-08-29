@@ -32,7 +32,7 @@ npm run dev
 3 Access the app at http://localhost:3000
 
 ```
-### 1.3 Configure Next.js for Static Export
+ 1.3 Configure Next.js for Static Export
 1 In the project root, create next.config.js: 
 /**
  * @type {import('next').NextConfig} 
@@ -49,7 +49,7 @@ This generates a static version of the app in the out folder.
 git add .
 git commit -m "Next.js project created"
 git push
-
+```
 ## Terraform Configuration
 ### 1.4 Set Up Project Directory
 1 mkdir terraform-nextjs
