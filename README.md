@@ -22,7 +22,7 @@ The website must be:
 
 git clone git@github.com:Godwin-svg/terraform-portfolio-project.git
 
-### 1.2 Clone Next.js Portfolio Starter Kit
+## 1.2 Clone Next.js Portfolio Starter Kit
 
 1 Create the Next.js project:
 npx create-next-app@latest nextjs-blog --use-npm --example "https://github.com/vercel/next-learn/tree/main/basics/learn-starter"
